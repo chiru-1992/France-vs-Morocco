@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>France vs Morocco | Quarter Final</title>
@@ -35,12 +34,13 @@
 
 </header>
 
-
 <section class="unlock-section">
 
 <h3>🔐 Unlock Tickets</h3>
 
-<p>Enter the Secret Code to reveal all players.</p>
+<p class="unlock-text">
+Enter the Secret Code to reveal all players.
+</p>
 
 <div class="unlock-box">
 
@@ -59,17 +59,17 @@ UNLOCK
 
 </section>
 
-
 <main>
 
-<div id="ticketContainer" class="ticket-container">
+<div
+id="ticketContainer"
+class="ticket-container">
 
-<!-- Tickets generated automatically by script.js -->
+<!-- Tickets will appear here -->
 
 </div>
 
 </main>
-
 
 <footer>
 
@@ -79,6 +79,10 @@ UNLOCK
 
 </footer>
 
+<!-- Load players first -->
+<script src="players.js"></script>
+
+<!-- Then load script -->
 <script src="script.js"></script>
 
 </body>
