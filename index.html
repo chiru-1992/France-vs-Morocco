@@ -1,83 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>France vs Morocco - Quarter Final</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>France vs Morocco | Quarter Final</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="header">
+<div class="header">
 
-<h1>🇫🇷 FRANCE VS MOROCCO 🇲🇦</h1>
+    <h3>🏆 QUARTER FINAL</h3>
 
-<h2>Quarter Final • FIFA World Cup 2026</h2>
+    <h1>🇫🇷 FRANCE VS MOROCCO 🇲🇦</h1>
 
-<div class="match-info">
-
-<div class="info-box">
-📅 <strong>Date:</strong> 10 July
-</div>
-
-<div class="info-box">
-🕜 <strong>Time:</strong> 1:30 AM
-</div>
+    <p>📅 10 July | 🕜 1:30 AM</p>
 
 </div>
 
-</header>
+<div class="codeBox">
 
-<section class="unlock-section">
+    <h2>Reveal Code</h2>
 
-<h3>🔐 Unlock Tickets</h3>
+    <input
+        type="password"
+        id="codeInput"
+        placeholder="Enter Secret Code">
 
-<p>Enter the Secret Code to reveal all players.</p>
+    <button onclick="revealTickets()">
+        Reveal
+    </button>
 
-<div class="unlock-box">
-
-<input
-type="password"
-id="secretCode"
-placeholder="Enter Secret Code">
-
-<button id="unlockBtn">
-UNLOCK
-</button>
+    <p id="message"></p>
 
 </div>
 
-<p id="message"></p>
-
-</section>
-
-<main>
-
-<div id="ticketContainer" class="ticket-container">
-
-<!-- Tickets will appear here -->
+<div id="ticketContainer" class="ticketContainer">
 
 </div>
 
-</main>
-
-<footer>
-
-<h3>CREATOR</h3>
-
-<p>CHIRANJEEVI GURUNG</p>
-
-</footer>
-
-<script src="players.js"></script>
 <script src="script.js"></script>
 
 </body>
-
 </html>
