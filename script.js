@@ -370,3 +370,116 @@ const tickets = [
     }
 }
 ];
+const ticketContainer = document.getElementById("ticketContainer");
+
+function loadTickets() {
+
+    ticketContainer.innerHTML = "";
+
+    tickets.forEach(ticket => {
+
+        ticketContainer.innerHTML += `
+        <div class="ticket">
+            <div class="ticketInner">
+
+                <div class="ticketFront">
+
+                    <div class="ticketNumber">
+                        Ticket ${ticket.ticket}
+                    </div>
+
+                    <div class="lockIcon">🔒</div>
+
+                    <div class="frontTitle">
+                        PREMIUM TICKET
+                    </div>
+
+                    <div class="frontMatch">
+                        🇫🇷 FRANCE VS MOROCCO 🇲🇦
+                    </div>
+
+                    <div class="frontText">
+                        Enter the reveal code to unlock both players.
+                    </div>
+
+                    <div class="buyerName">
+                        Buyer: ${ticket.buyer}
+                    </div>
+
+                </div>
+
+                <div class="ticketBack">
+
+                    <div class="ticketHeader">
+                        Ticket ${ticket.ticket}
+                    </div>
+
+                    <div class="players">
+
+                        <div class="player">
+                            <div class="country">${ticket.france.country}</div>
+
+                            <img src="${ticket.france.image}" alt="${ticket.france.name}">
+
+                            <div class="playerName">${ticket.france.name}</div>
+
+                            <div class="jersey">
+                                Jersey No. ${ticket.france.number}
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="player">
+                            <div class="country">${ticket.morocco.country}</div>
+
+                            <img src="${ticket.morocco.image}" alt="${ticket.morocco.name}">
+
+                            <div class="playerName">${ticket.morocco.name}</div>
+
+                            <div class="jersey">
+                                Jersey No. ${ticket.morocco.number}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="creator">
+                        Creator - CHIRANJEEVI GURUNG
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        `;
+
+    });
+
+}
+
+loadTickets();
+
+function revealTickets() {
+
+    const code = document.getElementById("codeInput").value.trim();
+
+    const message = document.getElementById("message");
+
+    if (code === SECRET_CODE) {
+
+        document.querySelectorAll(".ticket").forEach(ticket => {
+            ticket.classList.add("flip");
+        });
+
+        message.style.color = "#00ff99";
+        message.innerHTML = "✅ Tickets Revealed";
+
+    } else {
+
+        message.style.color = "#ff4444";
+        message.innerHTML = "❌ Wrong Reveal Code";
+
+    }
+
+}
