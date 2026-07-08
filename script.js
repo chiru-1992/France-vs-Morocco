@@ -1,21 +1,15 @@
-// ================================
-// SECRET CODE
-// ================================
-
-const SECRET_CODE = "NINJA TURTLE";
-
-// ================================
-// GET ELEMENTS
-// ================================
+// =========================
+// GET HTML ELEMENTS
+// =========================
 
 const container = document.getElementById("ticketContainer");
 const unlockBtn = document.getElementById("unlockBtn");
 const codeInput = document.getElementById("secretCode");
 const message = document.getElementById("message");
 
-// ================================
-// CREATE ALL TICKETS
-// ================================
+// =========================
+// CREATE TICKETS
+// =========================
 
 tickets.forEach(ticket => {
 
@@ -23,80 +17,59 @@ container.innerHTML += `
 
 <div class="ticket">
 
-<div class="ticket-inner">
+    <div class="ticket-inner">
 
-<div class="ticket-front">
+        <div class="ticket-front">
 
-<div class="ticket-number">
-🎫 Ticket ${ticket.ticket}
-</div>
+            <div class="ticket-number">🎫 Ticket ${ticket.ticket}</div>
 
-<div class="lock">🔒</div>
+            <div class="lock">🔒</div>
 
-<div class="locked">
-LOCKED
-</div>
+            <div class="locked">LOCKED</div>
 
-<div class="buyer">
-Buyer<br>
-<b>${ticket.buyer}</b>
-</div>
+            <div class="buyer">
+                <b>${ticket.buyer}</b>
+            </div>
 
-</div>
+        </div>
 
-<div class="ticket-back">
+        <div class="ticket-back">
 
-<div class="ticket-title">
-🎫 Ticket ${ticket.ticket}
-</div>
+            <div class="ticket-title">
+                Ticket ${ticket.ticket}
+            </div>
 
-<div class="players">
+            <div class="players">
 
-<div class="player">
+                <div class="player">
 
-<img src="${ticket.france.image}" alt="${ticket.france.name}">
+                    <img src="${ticket.france.image}">
 
-<div class="country">
-🇫🇷 FRANCE
-</div>
+                    <div class="country">🇫🇷 FRANCE</div>
 
-<div class="player-name">
-${ticket.france.name}
-</div>
+                    <div class="player-name">${ticket.france.name}</div>
 
-<div class="jersey">
-Jersey #${ticket.france.number}
-</div>
+                    <div class="jersey">#${ticket.france.number}</div>
 
-</div>
+                </div>
 
-<div class="player">
+                <div class="player">
 
-<img src="${ticket.morocco.image}" alt="${ticket.morocco.name}">
+                    <img src="${ticket.morocco.image}">
 
-<div class="country">
-🇲🇦 MOROCCO
-</div>
+                    <div class="country">🇲🇦 MOROCCO</div>
 
-<div class="player-name">
-${ticket.morocco.name}
-</div>
+                    <div class="player-name">${ticket.morocco.name}</div>
 
-<div class="jersey">
-Jersey #${ticket.morocco.number}
-</div>
+                    <div class="jersey">#${ticket.morocco.number}</div>
 
-</div>
+                </div>
 
-</div>
+            </div>
 
-<div class="buyer-bottom">
-Buyer : <b>${ticket.buyer}</b>
-</div>
+        </div>
 
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -104,49 +77,24 @@ Buyer : <b>${ticket.buyer}</b>
 
 });
 
-// ================================
-// UNLOCK FUNCTION
-// ================================
+// =========================
+// UNLOCK BUTTON
+// =========================
 
-unlockBtn.addEventListener("click", unlockTickets);
+unlockBtn.onclick = function(){
 
-codeInput.addEventListener("keydown", function(e){
+if(codeInput.value.trim().toUpperCase() === SECRET_CODE){
 
-if(e.key === "Enter"){
-unlockTickets();
-}
+message.innerHTML = "✅ Tickets Unlocked!";
 
-});
-
-function unlockTickets(){
-
-const code = codeInput.value.trim().toUpperCase();
-
-if(code === SECRET_CODE){
-
-message.textContent = "✅ Tickets Unlocked!";
-message.style.color = "lime";
-
-const allTickets = document.querySelectorAll(".ticket");
-
-allTickets.forEach((ticket,index)=>{
-
-setTimeout(()=>{
-
+document.querySelectorAll(".ticket").forEach(ticket=>{
 ticket.classList.add("flip");
-
-},index*150);
-
 });
-
-unlockBtn.disabled = true;
-codeInput.disabled = true;
 
 }else{
 
-message.textContent = "❌ Wrong Secret Code";
-message.style.color = "red";
+message.innerHTML = "❌ Wrong Secret Code";
 
 }
 
-}
+};
