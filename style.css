@@ -1,14 +1,546 @@
-const container = document.getElementById("ticketContainer");
+/* ===========================
+   GOOGLE FONT
+=========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-container.innerHTML = `
-<div class="ticket">
-  <div class="ticket-inner">
-    <div class="ticket-front">
-      <div class="ticket-number">🎫 Ticket 1</div>
-      <div class="lock">🔒</div>
-      <div class="locked">LOCKED</div>
-      <div class="buyer"><b>Priyanka</b></div>
-    </div>
-  </div>
-</div>
-`;
+/* ===========================
+   RESET
+=========================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ===========================
+   BODY
+=========================== */
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#001233,#003566,#780000);
+    color:#fff;
+    overflow-x:hidden;
+    padding:20px;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+.header{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    text-align:center;
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border:2px solid rgba(255,215,0,.5);
+    box-shadow:0 0 30px rgba(255,215,0,.25);
+}
+
+.header h3{
+    color:#ffd700;
+    font-size:18px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.header h1{
+    font-size:34px;
+    font-weight:800;
+    margin-bottom:12px;
+    color:#fff;
+    text-shadow:0 0 12px rgba(255,255,255,.4);
+}
+
+.header p{
+    font-size:18px;
+    color:#eee;
+}
+
+/* ===========================
+   REVEAL CODE BOX
+=========================== */
+.codeBox{
+    width:100%;
+    max-width:550px;
+    margin:30px auto;
+    text-align:center;
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border:2px solid rgba(255,215,0,.5);
+    box-shadow:0 0 25px rgba(255,215,0,.2);
+}
+
+.codeBox h2{
+    color:#ffd700;
+    margin-bottom:20px;
+}
+
+.codeBox input{
+    width:100%;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    font-size:17px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.codeBox button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#ffd700;
+    color:#000;
+    font-size:17px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.codeBox button:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 20px #ffd700;
+}
+
+#message{
+    margin-top:15px;
+    color:#ffcccb;
+    font-weight:600;
+}
+
+/* ===========================
+   TICKET GRID
+=========================== */
+.ticketContainer{
+    max-width:1200px;
+    margin:35px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:28px;
+    align-items:center;
+}
+
+/* ===========================
+   TICKET WRAPPER
+=========================== */
+.ticket{
+    perspective:1200px;
+    height:420px;
+}
+
+.ticketInner{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:1s;
+}
+
+.ticket.flip .ticketInner{
+    transform:rotateY(180deg);
+}
+/* ===========================
+   TICKET FRONT & BACK
+=========================== */
+
+.ticketFront,
+.ticketBack{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:22px;
+    overflow:hidden;
+    backface-visibility:hidden;
+    border:3px solid #FFD700;
+    box-shadow:
+        0 0 20px rgba(255,215,0,.35),
+        0 15px 40px rgba(0,0,0,.45);
+}
+
+/* ===========================
+   FRONT SIDE
+=========================== */
+
+.ticketFront{
+    background:linear-gradient(135deg,#002654,#0047AB,#C1272D);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.ticketFront::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,.05);
+}
+
+.ticketNumber{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#FFD700;
+    color:#000;
+    padding:6px 14px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:14px;
+}
+
+.lockIcon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.frontTitle{
+    font-size:28px;
+    font-weight:800;
+    color:#FFD700;
+    margin-bottom:10px;
+}
+
+.frontMatch{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.frontText{
+    font-size:16px;
+    color:#f1f1f1;
+    line-height:1.6;
+}
+
+.buyerName{
+    margin-top:25px;
+    padding:10px 18px;
+    background:rgba(255,255,255,.15);
+    border-radius:12px;
+    font-weight:700;
+}
+
+/* ===========================
+   BACK SIDE
+=========================== */
+
+.ticketBack{
+    transform:rotateY(180deg);
+    background:linear-gradient(135deg,#081C3A,#0D3B66,#6A040F);
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ===========================
+   BACK HEADER
+=========================== */
+
+.ticketHeader{
+    text-align:center;
+    color:#FFD700;
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+/* ===========================
+   PLAYERS AREA
+=========================== */
+
+.players{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    flex:1;
+}
+
+.player{
+    width:48%;
+    text-align:center;
+}
+
+.country{
+    font-size:15px;
+    font-weight:700;
+    color:#FFD700;
+    margin-bottom:8px;
+}
+
+.player img{
+    width:110px;
+    height:110px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid #FFD700;
+    margin-bottom:10px;
+}
+
+.playerName{
+    font-size:15px;
+    font-weight:700;
+    color:#fff;
+}
+
+.jersey{
+    margin-top:8px;
+    color:#FFD700;
+    font-size:14px;
+    font-weight:600;
+}
+
+.divider{
+    width:2px;
+    background:rgba(255,215,0,.5);
+    border-radius:5px;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.creator{
+    margin-top:15px;
+    text-align:center;
+    color:#FFD700;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+/* ===========================
+   PREMIUM HOVER EFFECT
+=========================== */
+
+.ticket:hover{
+    transform:translateY(-8px);
+    transition:.35s;
+}
+
+.ticket:hover .ticketFront,
+.ticket:hover .ticketBack{
+    box-shadow:
+        0 0 18px #FFD700,
+        0 0 35px rgba(255,215,0,.6),
+        0 15px 45px rgba(0,0,0,.45);
+}
+
+/* ===========================
+   SHINING EFFECT
+=========================== */
+
+.ticketFront::after,
+.ticketBack::after{
+    content:"";
+    position:absolute;
+    top:-120%;
+    left:-45%;
+    width:45%;
+    height:300%;
+    background:rgba(255,255,255,.25);
+    transform:rotate(25deg);
+    animation:shine 6s infinite;
+}
+
+@keyframes shine{
+    0%{
+        left:-60%;
+    }
+    100%{
+        left:150%;
+    }
+}
+
+/* ===========================
+   PLAYER IMAGE ANIMATION
+=========================== */
+
+.player img{
+    transition:.35s;
+}
+
+.player img:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 18px #FFD700;
+}
+
+/* ===========================
+   BUTTON EFFECT
+=========================== */
+
+.codeBox button:active{
+    transform:scale(.96);
+}
+
+/* ===========================
+   SCROLL BAR
+=========================== */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#081C3A;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#FFD700;
+    border-radius:20px;
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.header h1{
+    font-size:26px;
+}
+
+.header p{
+    font-size:16px;
+}
+
+.ticket{
+    height:400px;
+}
+
+.player img{
+    width:90px;
+    height:90px;
+}
+
+.playerName{
+    font-size:14px;
+}
+
+.country{
+    font-size:14px;
+}
+
+.jersey{
+    font-size:13px;
+}
+
+.ticketHeader{
+    font-size:20px;
+}
+
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media(max-width:480px){
+
+body{
+    padding:12px;
+}
+
+.header{
+    padding:18px;
+}
+
+.header h1{
+    font-size:22px;
+}
+
+.header h3{
+    font-size:15px;
+}
+
+.codeBox{
+    padding:18px;
+}
+
+.ticket{
+    height:380px;
+}
+
+.player img{
+    width:80px;
+    height:80px;
+}
+
+.frontTitle{
+    font-size:24px;
+}
+
+.frontMatch{
+    font-size:18px;
+}
+
+.ticketNumber{
+    font-size:12px;
+    padding:5px 12px;
+}
+
+.creator{
+    font-size:12px;
+}
+
+}
+
+/* ===========================
+   FLIP REVEAL ANIMATION
+=========================== */
+
+.ticket.flip .ticketInner{
+    animation:flipBounce .9s ease;
+}
+
+@keyframes flipBounce{
+
+0%{
+    transform:rotateY(0deg);
+}
+
+60%{
+    transform:rotateY(190deg);
+}
+
+100%{
+    transform:rotateY(180deg);
+}
+
+}
+
+/* ===========================
+   GLOWING HEADER
+=========================== */
+
+.header h1{
+    animation:headerGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes headerGlow{
+
+from{
+    text-shadow:0 0 8px rgba(255,255,255,.4);
+}
+
+to{
+    text-shadow:
+    0 0 12px #FFD700,
+    0 0 24px #FFD700,
+    0 0 36px #FFD700;
+}
+
+}
+
+/* ===========================
+   END
+=========================== */
